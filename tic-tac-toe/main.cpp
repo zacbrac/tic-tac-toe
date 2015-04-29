@@ -11,6 +11,15 @@
 #include <string>
 
 
+int check_for_win(char board_array[4][4]) {
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            std::cout << board_array[i][j];
+        }
+    }
+    return 0;
+}
+
 int draw_board (int x, int y, char board_array[4][4]) {
     std::cout << std::string(50, '\n');
     for (int i = 0; i < y; i++) {
@@ -23,23 +32,31 @@ int draw_board (int x, int y, char board_array[4][4]) {
     return 0;
 }
 
-bool plot_point (int x, int y, int valid_points[3][3], char board_array[4][4]) {
+bool plot_point (int x, int y, int valid_points[3][3],char marker, char board_array[4][4]) {
     int board_num_x = x-1;
     int board_num_y = y-1;
-    if (valid_points[board_num_y][board_num_x] == 1) {
-        std::cout << "If statement was triggered";
+    if (valid_points[board_num_x][board_num_y] == 1) {
         valid_points[board_num_x][board_num_y] = 0;
-        board_array[x][y] = 'x';
+        board_array[y][x] = marker;
         return true;
     } else {
-        std::cout << "Else statement was triggered";
         return false;
     }
+}
+
+int toggle_turn(char &marker) {
+    if (marker == 'x') {
+        marker = 'o';
+    } else {
+        marker = 'x';
+    }
+    return 0;
 }
 
 int main(int argc, const char * argv[]) {
     int x,y;
     std::string input;
+    char marker = 'x';
     
     char board[4][4] = {
         {' ','1','2','3'},
@@ -62,10 +79,14 @@ int main(int argc, const char * argv[]) {
         std::stringstream ss(input);
         ss >> x >> y;
         
-        plot_point(x,y,valid_points,board);
-        draw_board(4,4,board);
+        if (plot_point(x,y,valid_points,marker,board)) {
+            draw_board(4,4,board);
+            toggle_turn(marker);
+        } else {
+            std::cout << "Invalid move, please try again\n";
+        }
+
 
     }
-    
     return 0;
 }
