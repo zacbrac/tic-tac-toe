@@ -10,6 +10,34 @@
 #include <sstream>
 #include <string>
 
+int winner_yet(char board[4][4]) {
+    if (
+        (board[1][1] == 'x' && board[1][2] == 'x' && board[1][3] == 'x' ) ||
+        (board[2][1] == 'x' && board[2][2] == 'x' && board[2][3] == 'x' ) ||
+        (board[3][1] == 'x' && board[3][2] == 'x' && board[3][3] == 'x' ) ||
+        (board[1][1] == 'x' && board[2][1] == 'x' && board[3][1] == 'x' ) ||
+        (board[1][2] == 'x' && board[2][2] == 'x' && board[3][2] == 'x' ) ||
+        (board[1][3] == 'x' && board[2][3] == 'x' && board[3][3] == 'x' ) ||
+        (board[1][1] == 'x' && board[2][2] == 'x' && board[3][3] == 'x' ) ||
+        (board[1][3] == 'x' && board[2][2] == 'x' && board[3][1] == 'x' )
+        ) {
+        return 1;
+    } else if (
+        (board[1][1] == 'o' && board[1][2] == 'o' && board[1][3] == 'o' ) ||
+        (board[2][1] == 'o' && board[2][2] == 'o' && board[2][3] == 'o' ) ||
+        (board[3][1] == 'o' && board[3][2] == 'o' && board[3][3] == 'o' ) ||
+        (board[1][1] == 'o' && board[2][1] == 'o' && board[3][1] == 'o' ) ||
+        (board[1][2] == 'o' && board[2][2] == 'o' && board[3][2] == 'o' ) ||
+        (board[1][3] == 'o' && board[2][3] == 'o' && board[3][3] == 'o' ) ||
+        (board[1][1] == 'o' && board[2][2] == 'o' && board[3][3] == 'o' ) ||
+        (board[1][3] == 'o' && board[2][2] == 'o' && board[3][1] == 'o' )
+        ) {
+        return 2;
+    }
+
+    return 0;
+}
+
 
 bool game_finished(int valid_points[3][3]) {
     
@@ -79,7 +107,7 @@ int main(int argc, const char * argv[]) {
     
     draw_board(4,4,board);
     
-    while (game_finished(valid_points) == false) {
+    while (game_finished(valid_points) == false && winner_yet(board) == 0) {
         std::cout << "Choose your point e.g. x y\n";
         std::getline(std::cin,input);
         std::stringstream ss(input);
@@ -92,9 +120,9 @@ int main(int argc, const char * argv[]) {
             draw_board(4,4,board);
             std::cout << "Invalid move, please try again\n";
         }
-
-
-        
+    }
+    if (winner_yet(board) != 0) {
+        std::cout << "Player " << winner_yet(board) << " wins the round!\n";
     }
     return 0;
 }
