@@ -88,41 +88,47 @@ int toggle_turn(char &marker) {
 }
 
 int main(int argc, const char * argv[]) {
-    int x,y;
-    std::string input;
-    char marker = 'x';
-    
-    char board[4][4] = {
-        {' ','1','2','3'},
-        {'1','-','-','-'},
-        {'2','-','-','-'},
-        {'3','-','-','-'}
-    };
-    
-    int valid_points[3][3] = {
-        {1,1,1},
-        {1,1,1},
-        {1,1,1}
-    };
-    
-    draw_board(4,4,board);
-    
-    while (game_finished(valid_points) == false && winner_yet(board) == 0) {
-        std::cout << "Choose your point e.g. x y\n";
-        std::getline(std::cin,input);
-        std::stringstream ss(input);
-        ss >> x >> y;
+    bool game_status = true;
+    while (game_status) {
+        int x,y;
+        std::string input, general_input;
+        char marker = 'x';
+        char board[4][4] = {
+            {' ','1','2','3'},
+            {'1','-','-','-'},
+            {'2','-','-','-'},
+            {'3','-','-','-'}
+        };
+        int valid_points[3][3] = {
+            {1,1,1},
+            {1,1,1},
+            {1,1,1}
+        };
         
-        if (plot_point(x,y,valid_points,marker,board)) {
-            draw_board(4,4,board);
-            toggle_turn(marker);
-        } else {
-            draw_board(4,4,board);
-            std::cout << "Invalid move, please try again\n";
+        draw_board(4,4,board);
+        
+        while (game_finished(valid_points) == false && winner_yet(board) == 0) {
+            std::cout << "Choose your point e.g. x y\n";
+
+            std::cin >> x;
+            std::cin >> y;
+            
+            if (plot_point(x,y,valid_points,marker,board)) {
+                draw_board(4,4,board);
+                toggle_turn(marker);
+            } else {
+                draw_board(4,4,board);
+                std::cout << "Invalid move, please try again\n";
+            }
+
+            
         }
-    }
-    if (winner_yet(board) != 0) {
         std::cout << "Player " << winner_yet(board) << " wins the round!\n";
+        std::cout << "Would you like to play again?\n";
+        std::cin >> general_input;
+        if (general_input == "no" || general_input == "No") {
+            game_status = false;
+        }
     }
     return 0;
 }
