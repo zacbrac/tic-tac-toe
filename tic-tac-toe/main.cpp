@@ -30,7 +30,7 @@ int draw_board (int x, int y, char board_array[4][4]) {
     for (int i = 0; i < y; i++) {
         std::cout << "\t\t";
         for (int j = 0; j < x; j++) {
-            std::cout << board_array[i][j];
+            std::cout << " " << board_array[i][j];
         }
         std::cout << "\n";
     }
