@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>3F4C82CA-80A6-43A5-9753-FD21748989A1</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>tic-tac-toe</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>5FA715B83BB7514706D1D303C0E1C70CFD433A91</key>
 		<string>https://github.com/zacbrac/tic-tac-toe.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>tic-tac-toe.xcodeproj/project.xcworkspace</string>
+	<string>tic-tac-toe.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>5FA715B83BB7514706D1D303C0E1C70CFD433A91</key>

@@ -11,24 +11,30 @@
 #include <string>
 
 
-int check_for_win(char board_array[4][4]) {
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            std::cout << board_array[i][j];
+bool game_finished(int valid_points[3][3]) {
+    
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (valid_points[i][j] == 1) {
+                return false;
+            }
         }
     }
-    return 0;
+    std::cout << "GAME OVER / CAT SCRATCH OR WHATEVER IT'S CALLED\n";
+
+    return true;
 }
 
 int draw_board (int x, int y, char board_array[4][4]) {
     std::cout << std::string(50, '\n');
     for (int i = 0; i < y; i++) {
+        std::cout << "\t\t";
         for (int j = 0; j < x; j++) {
             std::cout << board_array[i][j];
         }
         std::cout << "\n";
     }
-    
+    std::cout << std::string(4, '\n');
     return 0;
 }
 
@@ -73,7 +79,7 @@ int main(int argc, const char * argv[]) {
     
     draw_board(4,4,board);
     
-    while (true) {
+    while (game_finished(valid_points) == false) {
         std::cout << "Choose your point e.g. x y\n";
         std::getline(std::cin,input);
         std::stringstream ss(input);
@@ -83,10 +89,12 @@ int main(int argc, const char * argv[]) {
             draw_board(4,4,board);
             toggle_turn(marker);
         } else {
+            draw_board(4,4,board);
             std::cout << "Invalid move, please try again\n";
         }
 
 
+        
     }
     return 0;
 }
