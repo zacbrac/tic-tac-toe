@@ -113,14 +113,20 @@ int main(int argc, const char * argv[]) {
             std::cin >> x;
             std::cin >> y;
             
-            if (plot_point(x,y,valid_points,marker,board)) {
-                draw_board(4,4,board);
-                toggle_turn(marker);
+            if  (std::cin.fail()) {
+                std::cout << "Invalid input, please start over\n";
+                x = 0, y = 0;
+                exit(0);
             } else {
-                draw_board(4,4,board);
-                std::cout << "Invalid move, please try again\n";
-            }
+                if (plot_point(x,y,valid_points,marker,board)) {
+                    draw_board(4,4,board);
+                    toggle_turn(marker);
+                } else {
+                    draw_board(4,4,board);
+                    std::cout << "Invalid move, please try again\n";
+                }
 
+            }
             
         }
         std::cout << "Player " << winner_yet(board) << " wins the round!\n";
