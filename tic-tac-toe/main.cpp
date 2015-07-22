@@ -53,7 +53,7 @@ bool game_finished(char board[4][4]) {
     
 }
 
-int draw_board (int x, int y, char board_array[4][4]) {
+void draw_board (int x, int y, char board_array[4][4]) {
     
     std::cout << std::string(50, '\n');
     
@@ -72,7 +72,6 @@ int draw_board (int x, int y, char board_array[4][4]) {
     }
 
     std::cout << std::string(4, '\n');
-    return 0;
     
 }
 
